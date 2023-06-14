@@ -22,6 +22,9 @@ const Cats = (): JSX.Element => {
         setError(`error on loading data ${error}`);
         setIsLoading(false);
       });
+    return () => {
+      // Cleanup logic here
+    };
   }, []);
 
   return (

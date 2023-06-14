@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { MainContextProvider } from '../../../containers/MainContexProvider';
+import { MainContextProvider } from '../../../context/MainContexProvider';
 
 const Login = () => {
   const { isAuth, setAuth } = useContext(MainContextProvider);
