@@ -1,14 +1,12 @@
 import { useMemo, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { PrivateRoute } from '../global/components/PrivateRoute';
+import Cats from '../pages/cats/components/Cat/Cats';
+import ContactUS from '../pages/contactus/ContactUS';
+import Dashboard from '../pages/dashboard/Dashboard';
 
-import Cats from '../features/cats/components/Cat/Cats';
-import ContactUS from '../features/contactus/ContactUS';
-import Dashboard from '../features/dashboard/Dashboard';
-
-import NavBar from '../global/components/layout/NavBar/NavBar';
-import { MainContextProvider } from '../global/containers/MainContexProvider';
+import { Layout } from '../shared/components/layout/Layout/Layout';
+import { MainContextProvider } from '../shared/context/MainContexProvider';
 
 const AppRouter = (): JSX.Element => {
   const [isAuth, setAuth] = useState(false);
@@ -17,16 +15,29 @@ const AppRouter = (): JSX.Element => {
   return (
     <MainContextProvider.Provider value={contextValue}>
       <BrowserRouter>
-        <NavBar />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/contactus" element={<ContactUS />} />
+          <Route
+            path="/"
+            element={
+              <Layout isPrivate={false}>
+                <Dashboard />
+              </Layout>
+            }
+          />
+          <Route
+            path="/contactus"
+            element={
+              <Layout isPrivate={false}>
+                <ContactUS />
+              </Layout>
+            }
+          />
           <Route
             path="/cats"
             element={
-              <PrivateRoute>
+              <Layout isPrivate>
                 <Cats />
-              </PrivateRoute>
+              </Layout>
             }
           />
         </Routes>
